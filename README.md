@@ -19,5 +19,5 @@ Professional corporate website for UES Energy Solutions Limited.
 
 1. Clone repository:
 ```bash
-git clone https://github.com/your-ajay7456/ues-energy-solutions.git
+git clone https://github.com/ajay7456/ues-energy-solutions.git
 cd ues-energy-solutions
