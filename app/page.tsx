@@ -7,7 +7,12 @@ export default function Home() {
       <div className="relative bg-gradient-to-r from-blue-900/90 to-blue-800/90 text-white">
         {/* Oil Rig Background */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-40" />
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-40"
+            style={{
+              backgroundImage: "url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
+            }}
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80"></div>
         </div>
         
@@ -50,7 +55,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Services Overview */}
+      {/* Services Overview - KEEP ORIGINAL ICONS */}
       <section className="py-16 bg-gradient-to-b from-white to-blue-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -64,14 +69,17 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { name: 'Reservoir & Subsurface Studies', desc: 'Comprehensive characterization & modeling', link: '/services#reservoir' },
-              { name: 'Oil & Gas Field Services', desc: 'Advanced oil & gas operations', link: '/services#field-services' },
-              { name: 'Engineering & Technical Services', desc: 'End-to-end engineering support', link: '/services#engineering' },
-              { name: 'Supply Chain & Logistics', desc: 'Integrated supply chain solutions', link: '/services#supply-chain' },
-              { name: 'Clean Energy Initiatives', desc: 'Sustainable energy solutions', link: '/services#clean-energy' },
-              { name: 'Digital Solutions', desc: 'AI & technology integration', link: '/services#digital' },
+              { name: 'Reservoir & Subsurface Studies', desc: 'Comprehensive characterization & modeling', link: '/services#reservoir', icon: '🔬' },
+              { name: 'Oil & Gas Field Services', desc: 'Advanced oil & gas operations', link: '/services#field-services', icon: '⛏️' },
+              { name: 'Engineering & Technical Services', desc: 'End-to-end engineering support', link: '/services#engineering', icon: '⚙️' },
+              { name: 'Supply Chain & Logistics', desc: 'Integrated supply chain solutions', link: '/services#supply-chain', icon: '📦' },
+              { name: 'Clean Energy Initiatives', desc: 'Sustainable energy solutions', link: '/services#clean-energy', icon: '🌱' },
+              { name: 'Digital Solutions', desc: 'AI & technology integration', link: '/services#digital', icon: '💻' },
             ].map((service, idx) => (
               <div key={idx} className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow group">
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {service.icon}
+                </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">{service.name}</h3>
                 <p className="text-gray-600 mb-4">{service.desc}</p>
                 <Link 
