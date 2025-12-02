@@ -1,16 +1,26 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
-import { ChevronDown, ChevronUp, Search } from 'lucide-react'
+import { 
+  Database, 
+  Drill, 
+  Wrench, 
+  Package, 
+  Leaf, 
+  Cpu, 
+  GraduationCap,
+  ChevronDown,
+  ChevronUp,
+  Search
+} from 'lucide-react'
 
 const servicesData = [
   {
     id: 'reservoir',
     title: 'Reservoir & Subsurface Integrated Studies',
     description: 'Comprehensive reservoir characterization and modeling services to optimize field development and enhance recovery.',
-    iconUrl: 'https://i.imgur.com/E41EXF4.png',
+    icon: <Database className="h-8 w-8" />,
     items: [
       'Comprehensive reservoir characterization and modelling',
       'Geological, geophysical, and petrophysical analysis',
@@ -25,7 +35,7 @@ const servicesData = [
     id: 'field-services',
     title: 'Oil & Gas Field Services',
     description: 'Advanced well services and field operations for optimal production and reservoir management.',
-    iconUrl: 'https://i.imgur.com/sRnKQ2F.png',
+    icon: <Drill className="h-8 w-8" />,
     items: [
       'Wireline logging (open-hole and cased-hole)',
       'Borehole pressure (BHP) measurement and acquisition',
@@ -39,7 +49,7 @@ const servicesData = [
     id: 'engineering',
     title: 'Engineering, Operations & Technical Services',
     description: 'End-to-end engineering support and operational management for energy projects.',
-    iconUrl: 'https://i.imgur.com/z2IykSo.png',
+    icon: <Wrench className="h-8 w-8" />,
     items: [
       'Drilling and completion engineering support',
       'Wellsite supervision and operational management',
@@ -52,7 +62,7 @@ const servicesData = [
     id: 'supply-chain',
     title: 'Supply Chain, Procurement & Logistics',
     description: 'Integrated supply chain solutions for efficient energy operations.',
-    iconUrl: 'https://i.imgur.com/H7WJqps.png',
+    icon: <Package className="h-8 w-8" />,
     items: [
       'End-to-end supply-chain management for energy operations',
       'Strategic sourcing, vendor management, and procurement services',
@@ -65,7 +75,7 @@ const servicesData = [
     id: 'clean-energy',
     title: 'Clean Energy & Sustainability Initiatives',
     description: 'Sustainable energy solutions and environmental stewardship programs.',
-    iconUrl: 'https://i.imgur.com/aamdH0F.png',
+    icon: <Leaf className="h-8 w-8" />,
     items: [
       'Renewable-energy project development (solar, wind, hybrid systems)',
       'Energy-efficiency studies and decarbonization strategies',
@@ -79,7 +89,7 @@ const servicesData = [
     id: 'digital',
     title: 'Digital & Technology Solutions',
     description: 'Cutting-edge digital solutions for data-driven energy operations.',
-    iconUrl: 'https://i.imgur.com/70amxo6.png',
+    icon: <Cpu className="h-8 w-8" />,
     items: [
       'Data acquisition, digital logging, and real-time monitoring',
       'Reservoir software and analytics solutions',
@@ -92,7 +102,7 @@ const servicesData = [
     id: 'training',
     title: 'Training, Competency Development & Consulting',
     description: 'Professional development and strategic advisory services.',
-    iconUrl: 'https://i.imgur.com/SbjLmwJ.png',
+    icon: <GraduationCap className="h-8 w-8" />,
     items: [
       'Technical training for subsurface, drilling, and production disciplines',
       'Safety, operations, and regulatory compliance training',
@@ -118,11 +128,16 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
-      {/* Hero Section with Your Image */}
+      {/* Hero Section with YOUR Image */}
       <div className="relative bg-gradient-to-r from-blue-900/90 to-blue-800/90 text-white">
-        {/* Background Image */}
+        {/* Your Image Background */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[url('https://i.imgur.com/bIAXNIx.jpeg')] bg-cover bg-center opacity-40" />
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-40"
+            style={{
+              backgroundImage: "url('https://i.imgur.com/bIAXNIx.jpeg')"
+            }}
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80"></div>
         </div>
         
@@ -155,7 +170,7 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Services List */}
+      {/* Services List - KEEP ORIGINAL ICONS */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="space-y-6">
           {filteredServices.map((service) => (
@@ -163,15 +178,8 @@ export default function Services() {
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-start">
-                    <div className="p-3 rounded-lg bg-blue-50 mr-4 flex-shrink-0">
-                      <div className="relative h-10 w-10">
-                        <Image
-                          src={service.iconUrl}
-                          alt={`${service.title} icon`}
-                          fill
-                          className="object-contain"
-                        />
-                      </div>
+                    <div className="p-3 rounded-lg bg-blue-50 text-blue-900 mr-4">
+                      {service.icon}
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-gray-800 mb-2">{service.title}</h3>
