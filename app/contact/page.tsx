@@ -33,7 +33,7 @@ export default function Contact() {
                   href="mailto:UESEnergySolutions@gmail.com"
                   className="text-blue-900 text-lg hover:text-blue-700"
                 >
-                  UESEnergySolutions@gmail.com
+                  info@uesenergysolutions.com
                 </a>
               </div>
             </div>
