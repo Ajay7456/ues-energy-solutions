@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Contact() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
@@ -30,10 +32,10 @@ export default function Contact() {
               <div>
                 <h3 className="text-xl font-semibold text-gray-800 mb-3">Email Address</h3>
                 <a 
-                  href="mailto:UESEnergySolutions@gmail.com"
+                  href="mailto:Info@uesenergysolutions.com"
                   className="text-blue-900 text-lg hover:text-blue-700"
                 >
-                  info@uesenergysolutions.com
+                  Info@uesenergysolutions.com
                 </a>
               </div>
             </div>
