@@ -1,25 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-import { 
-  Database, 
-  Drill, 
-  Wrench, 
-  Package, 
-  Leaf, 
-  Cpu, 
-  GraduationCap,
-  ChevronDown,
-  ChevronUp,
-  Search
-} from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ChevronDown, ChevronUp, Search } from 'lucide-react'
 
 const servicesData = [
   {
     id: 'reservoir',
     title: 'Reservoir & Subsurface Integrated Studies',
     description: 'Comprehensive reservoir characterization and modeling services to optimize field development and enhance recovery.',
-    icon: <Database size={24} />,
+    iconUrl: 'https://i.imgur.com/E41EXF4.png',
     items: [
       'Comprehensive reservoir characterization and modelling',
       'Geological, geophysical, and petrophysical analysis',
@@ -34,7 +25,7 @@ const servicesData = [
     id: 'field-services',
     title: 'Oil & Gas Field Services',
     description: 'Advanced well services and field operations for optimal production and reservoir management.',
-    icon: <Drill size={24} />,
+    iconUrl: 'https://i.imgur.com/sRnKQ2F.png',
     items: [
       'Wireline logging (open-hole and cased-hole)',
       'Borehole pressure (BHP) measurement and acquisition',
@@ -48,7 +39,7 @@ const servicesData = [
     id: 'engineering',
     title: 'Engineering, Operations & Technical Services',
     description: 'End-to-end engineering support and operational management for energy projects.',
-    icon: <Wrench size={24} />,
+    iconUrl: 'https://i.imgur.com/z2IykSo.png',
     items: [
       'Drilling and completion engineering support',
       'Wellsite supervision and operational management',
@@ -61,7 +52,7 @@ const servicesData = [
     id: 'supply-chain',
     title: 'Supply Chain, Procurement & Logistics',
     description: 'Integrated supply chain solutions for efficient energy operations.',
-    icon: <Package size={24} />,
+    iconUrl: 'https://i.imgur.com/H7WJqps.png',
     items: [
       'End-to-end supply-chain management for energy operations',
       'Strategic sourcing, vendor management, and procurement services',
@@ -74,7 +65,7 @@ const servicesData = [
     id: 'clean-energy',
     title: 'Clean Energy & Sustainability Initiatives',
     description: 'Sustainable energy solutions and environmental stewardship programs.',
-    icon: <Leaf size={24} />,
+    iconUrl: 'https://i.imgur.com/aamdH0F.png',
     items: [
       'Renewable-energy project development (solar, wind, hybrid systems)',
       'Energy-efficiency studies and decarbonization strategies',
@@ -88,7 +79,7 @@ const servicesData = [
     id: 'digital',
     title: 'Digital & Technology Solutions',
     description: 'Cutting-edge digital solutions for data-driven energy operations.',
-    icon: <Cpu size={24} />,
+    iconUrl: 'https://i.imgur.com/70amxo6.png',
     items: [
       'Data acquisition, digital logging, and real-time monitoring',
       'Reservoir software and analytics solutions',
@@ -101,7 +92,7 @@ const servicesData = [
     id: 'training',
     title: 'Training, Competency Development & Consulting',
     description: 'Professional development and strategic advisory services.',
-    icon: <GraduationCap size={24} />,
+    iconUrl: 'https://i.imgur.com/SbjLmwJ.png',
     items: [
       'Technical training for subsurface, drilling, and production disciplines',
       'Safety, operations, and regulatory compliance training',
@@ -127,19 +118,30 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
-          <p className="text-xl text-blue-100 max-w-3xl">
-            Comprehensive energy solutions across the entire value chain. Explore our seven core service areas.
-          </p>
+      {/* Hero Section with Your Image */}
+      <div className="relative bg-gradient-to-r from-blue-900/90 to-blue-800/90 text-white">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[url('https://i.imgur.com/bIAXNIx.jpeg')] bg-cover bg-center opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80"></div>
+        </div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 py-16">
+          <div className="max-w-4xl">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
+            <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-4">
+              Provider of Choice for Energy Solutions
+            </div>
+            <p className="text-xl text-blue-100">
+              Comprehensive energy solutions across the entire value chain. Explore our seven core service areas.
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Search Bar */}
       <div className="max-w-7xl mx-auto px-4 -mt-6">
-        <div className="bg-white rounded-lg shadow-lg p-4 mb-8">
+        <div className="bg-white rounded-xl shadow-lg p-4 mb-8">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
             <input
@@ -157,43 +159,89 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="space-y-6">
           {filteredServices.map((service) => (
-            <div key={service.id} id={service.id} className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+            <div key={service.id} id={service.id} className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center">
-                    <div className="p-3 rounded-lg bg-blue-50 text-blue-900 mr-4">
-                      {service.icon}
+                  <div className="flex items-start">
+                    <div className="p-3 rounded-lg bg-blue-50 mr-4 flex-shrink-0">
+                      <div className="relative h-10 w-10">
+                        <Image
+                          src={service.iconUrl}
+                          alt={`${service.title} icon`}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-800">{service.title}</h3>
-                      <p className="text-gray-600 mt-1">{service.description}</p>
+                      <h3 className="text-xl font-bold text-gray-800 mb-2">{service.title}</h3>
+                      <p className="text-gray-600">{service.description}</p>
                     </div>
                   </div>
                   <button
                     onClick={() => toggleSection(service.id)}
-                    className="text-blue-900 hover:text-blue-700 ml-4"
+                    className="text-blue-900 hover:text-blue-700 ml-4 flex-shrink-0"
+                    aria-label={expandedSection === service.id ? "Collapse section" : "Expand section"}
                   >
                     {expandedSection === service.id ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
                   </button>
                 </div>
                 
                 {expandedSection === service.id && (
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    <ul className="space-y-2">
+                  <div className="mt-6 pt-6 border-t border-gray-100">
+                    <ul className="space-y-3">
                       {service.items.map((item, index) => (
-                        <li key={index} className="flex items-start">
-                          <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mr-3 mt-0.5">
+                        <li key={index} className="flex items-start group/item">
+                          <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                             <div className="h-2 w-2 rounded-full bg-blue-900" />
                           </div>
-                          <span className="text-gray-700">{item}</span>
+                          <span className="text-gray-700 group-hover/item:text-blue-900 transition-colors">{item}</span>
                         </li>
                       ))}
                     </ul>
+                    
+                    {/* Contact CTA within expanded section */}
+                    <div className="mt-6 pt-6 border-t border-gray-100">
+                      <p className="text-gray-600 mb-4">Interested in this service?</p>
+                      <Link
+                        href="/contact"
+                        className="inline-flex items-center bg-blue-900 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-800 transition-colors"
+                      >
+                        Contact Us for Details
+                        <span className="ml-2">→</span>
+                      </Link>
+                    </div>
                   </div>
                 )}
               </div>
             </div>
           ))}
+        </div>
+        
+        {filteredServices.length === 0 && (
+          <div className="text-center py-12">
+            <div className="text-gray-400 mb-4">
+              <Search size={48} className="mx-auto" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-600 mb-2">No services found</h3>
+            <p className="text-gray-500">Try searching with different keywords</p>
+          </div>
+        )}
+      </div>
+
+      {/* Contact CTA */}
+      <div className="max-w-7xl mx-auto px-4 pb-16">
+        <div className="bg-gradient-to-r from-blue-900 to-blue-800 rounded-xl shadow-lg p-8 text-center">
+          <h2 className="text-2xl font-bold text-white mb-4">Need Custom Energy Solutions?</h2>
+          <p className="text-blue-100 mb-6">
+            Contact our team of experts to discuss your specific energy project requirements.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+          >
+            Get in Touch
+          </Link>
         </div>
       </div>
     </div>
