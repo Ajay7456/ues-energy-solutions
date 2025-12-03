@@ -12,7 +12,8 @@ import {
   GraduationCap,
   ChevronDown,
   ChevronUp,
-  Search
+  Search,
+  ArrowRight
 } from 'lucide-react'
 
 interface Service {
@@ -123,6 +124,7 @@ const servicesData: Service[] = [
 export default function Services() {
   const [expandedSection, setExpandedSection] = useState<string | null>('reservoir')
   const [searchTerm, setSearchTerm] = useState('')
+  const [touchActive, setTouchActive] = useState<string | null>(null)
 
   const filteredServices = servicesData.filter(service =>
     service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -136,9 +138,9 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
-      {/* Hero Section with Deep Blue Background */}
-      <div className="relative bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16">
-        {/* Subtle pattern overlay for depth */}
+      {/* Hero Section */}
+      <div className="relative bg-gradient-to-r from-blue-900 to-blue-800 text-white">
+        {/* Subtle pattern overlay */}
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -152,7 +154,8 @@ export default function Services() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 py-16">
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
-            <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-4">
+            <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg text-sm font-semibold mb-4">
+              <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
               Provider of Choice for Energy Solutions
             </div>
             <p className="text-xl text-blue-100">
@@ -172,7 +175,7 @@ export default function Services() {
               placeholder="Search services..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition"
+              className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-900 focus:border-transparent outline-none transition touch-manipulation text-lg"
             />
           </div>
         </div>
@@ -187,7 +190,7 @@ export default function Services() {
               <div
                 key={service.id}
                 id={service.id}
-                className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow"
+                className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow touch-manipulation"
               >
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
@@ -196,7 +199,6 @@ export default function Services() {
                         {service.icon}
                       </div>
                       <div>
-                        {/* Heading with id for accessibility */}
                         <h3
                           className="text-xl font-bold text-gray-800 mb-2"
                           id={`accordion-header-${service.id}`}
@@ -208,10 +210,12 @@ export default function Services() {
                     </div>
                     <button
                       onClick={() => toggleSection(service.id)}
+                      onTouchStart={() => setTouchActive(service.id)}
+                      onTouchEnd={() => setTouchActive(null)}
                       aria-label={expanded ? `Collapse ${service.title}` : `Expand ${service.title}`}
                       aria-expanded={expanded}
                       aria-controls={`accordion-panel-${service.id}`}
-                      className="text-blue-900 hover:text-blue-700 ml-4 flex-shrink-0 focus:ring-2 focus:ring-blue-800 rounded"
+                      className={`text-blue-900 hover:text-blue-700 ml-4 flex-shrink-0 focus:ring-2 focus:ring-blue-800 rounded-full p-2 touch-manipulation active:scale-95 transition-transform ${touchActive === service.id ? 'scale-95' : ''}`}
                     >
                       {expanded ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
                     </button>
@@ -242,10 +246,12 @@ export default function Services() {
                         <p className="text-gray-600 mb-4">Interested in this service?</p>
                         <Link
                           href="/contact"
-                          className="inline-flex items-center bg-blue-900 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-800 transition-colors"
+                          className="inline-flex items-center bg-blue-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-800 active:scale-95 transition-all duration-200 touch-manipulation"
+                          onTouchStart={() => setTouchActive(`contact-${service.id}`)}
+                          onTouchEnd={() => setTouchActive(null)}
                         >
                           Contact Us for Details
-                          <span className="ml-2">→</span>
+                          <ArrowRight className={`ml-2 transition-transform ${touchActive === `contact-${service.id}` ? 'translate-x-1' : 'group-hover:translate-x-1'}`} />
                         </Link>
                       </div>
                     </div>
@@ -276,9 +282,12 @@ export default function Services() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+            className="inline-flex items-center bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 active:scale-95 transition-all duration-200 touch-manipulation"
+            onTouchStart={() => setTouchActive('main-cta')}
+            onTouchEnd={() => setTouchActive(null)}
           >
             Get in Touch
+            <ArrowRight className={`ml-3 transition-transform ${touchActive === 'main-cta' ? 'translate-x-1' : 'group-hover:translate-x-1'}`} />
           </Link>
         </div>
       </div>
