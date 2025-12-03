@@ -134,12 +134,11 @@ export default function Services() {
   )
 
   const toggleSection = (id: string) => {
-    if (animatingSection) return // Prevent rapid clicks
+    if (animatingSection) return
     
     setAnimatingSection(id)
     setExpandedSection(expandedSection === id ? null : id)
     
-    // Reset animation state after animation completes
     setTimeout(() => {
       setAnimatingSection(null)
     }, 300)
@@ -149,7 +148,6 @@ export default function Services() {
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-r from-blue-900 to-blue-800 text-white">
-        {/* Subtle pattern overlay */}
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -159,7 +157,6 @@ export default function Services() {
             }}
           ></div>
         </div>
-        {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 py-16">
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in-up">Our Services</h1>
@@ -242,7 +239,6 @@ export default function Services() {
                     </button>
                   </div>
 
-                  {/* Animated Content Area */}
                   <div
                     id={`accordion-panel-${service.id}`}
                     role="region"
@@ -270,7 +266,6 @@ export default function Services() {
                           ))}
                         </ul>
 
-                        {/* Animated Contact CTA */}
                         <div className="mt-6 pt-6 border-t border-gray-100 animate-fade-in-up">
                           <p className="text-gray-600 mb-4">Interested in this service?</p>
                           <Link
