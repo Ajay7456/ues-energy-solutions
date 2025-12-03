@@ -2,72 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  /* Custom animations */
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+@layer base {
+  /* Better touch targets */
+  button, 
+  a,
+  [role="button"] {
+    @apply touch-manipulation;
+    min-height: 44px;
+    min-width: 44px;
   }
   
-  @keyframes slide-up {
-    from { 
-      opacity: 0;
-      transform: translateY(30px);
+  /* Prevent text selection on tap */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  
+  /* Smooth transitions */
+  * {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  /* Touch feedback */
+  .touch-manipulation {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  
+  .touch-manipulation:active {
+    transform: scale(0.98);
+  }
+  
+  /* Smooth scrolling for mobile */
+  @media (max-width: 768px) {
+    html {
+      scroll-behavior: smooth;
     }
-    to { 
+    
+    /* Larger touch targets on mobile */
+    .touch-target {
+      min-height: 48px;
+      min-width: 48px;
+    }
+  }
+  
+  /* Custom animations */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
       opacity: 1;
       transform: translateY(0);
     }
   }
   
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes shimmer {
-    0% { background-position: -1000px 0; }
-    100% { background-position: 1000px 0; }
-  }
-  
-  @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
-    50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); }
-  }
-  
-  /* Animation classes */
-  .animate-float {
-    animation: float 5s ease-in-out infinite;
-  }
-  
-  .animate-slide-up {
-    animation: slide-up 0.6s ease-out forwards;
-  }
-  
-  .animate-fade-in {
-    animation: fade-in 0.8s ease-out forwards;
-  }
-  
-  .animate-shimmer {
-    animation: shimmer 2s infinite linear;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    background-size: 1000px 100%;
-  }
-  
-  .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out;
   }
 }
 
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -75,16 +80,10 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #0A2463, #1e40af);
-  border-radius: 5px;
+  background: #1e40af;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #08204d, #1e3a8a);
-}
-
-/* Selection color */
-::selection {
-  background-color: rgba(37, 99, 235, 0.3);
-  color: white;
+  background: #1e3a8a;
 }
