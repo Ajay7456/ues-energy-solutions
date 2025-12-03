@@ -44,6 +44,7 @@ export default function RootLayout({
               <Link href="/" className="flex items-center group">
                 <div className="relative h-12 w-12 rounded-full bg-white flex items-center justify-center mr-3 
                               transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg">
+                  {/* Simple image without onError handler */}
                   <img
                     src="https://i.imgur.com/fHC1NZ4.png"
                     alt="UES Energy Solutions Logo"
@@ -155,6 +156,7 @@ export default function RootLayout({
               <div>
                 <div className="flex items-center mb-4">
                   <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center mr-3">
+                    {/* Simple image without onError handler */}
                     <img
                       src="https://i.imgur.com/fHC1NZ4.png"
                       alt="UES Energy Solutions Logo"
