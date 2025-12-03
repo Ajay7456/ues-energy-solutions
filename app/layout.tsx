@@ -129,7 +129,11 @@ export default function RootLayout({
               Contact
             </Link>
             <div className="px-4 py-3">
-              <Link href="/contact" className="block w-full bg-blue-900 text-white text-center px-6 py-3 rounded-lg hover:bg-blue-800 transition-colors font-medium" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link
+                href="/contact"
+                className="block w-full bg-blue-900 text-white text-center px-6 py-3 rounded-lg hover:bg-blue-800 transition-colors font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
                 Get Quote
               </Link>
             </div>
