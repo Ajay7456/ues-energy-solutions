@@ -95,12 +95,12 @@ export default function Contact() {
                 <p className="text-blue-100 mb-4">
                   Need immediate assistance? Send us a message and we'll respond within 24 hours.
                 </p>
-                <Link
-                  href="/#contact-form"  // Changed to a simple link
+                <a
+                  href="/"
                   className="w-full bg-white text-blue-900 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors block text-center"
                 >
                   Send Quick Message
-                </Link>
+                </a>
               </div>
               
               <div className="p-4 bg-blue-50 rounded-lg">
