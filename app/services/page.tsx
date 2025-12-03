@@ -128,26 +128,33 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
-      {/* Hero Section with YOUR Image */}
-      <div className="relative bg-gradient-to-r from-blue-900/90 to-blue-800/90 text-white">
-        {/* Your Image Background */}
+      {/* Hero Section with Your Image Background */}
+      <div className="relative text-white py-16 overflow-hidden">
+        {/* Background Image with Dark Overlay */}
         <div className="absolute inset-0 z-0">
+          {/* Your Image */}
           <div 
-            className="absolute inset-0 bg-cover bg-center opacity-40"
+            className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('https://i.imgur.com/bIAXNIx.jpeg')"
+              backgroundImage: "url('https://i.imgur.com/bIAXNIx.jpeg')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-800/80"></div>
+          {/* Dark Overlay for better text visibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/70"></div>
+          {/* Subtle gradient for depth */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-blue-800/20"></div>
         </div>
         
+        {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 py-16">
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
             <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-4">
               Provider of Choice for Energy Solutions
             </div>
-            <p className="text-xl text-blue-100">
+            <p className="text-xl text-gray-100">
               Comprehensive energy solutions across the entire value chain. Explore our seven core service areas.
             </p>
           </div>
@@ -155,7 +162,7 @@ export default function Services() {
       </div>
 
       {/* Search Bar */}
-      <div className="max-w-7xl mx-auto px-4 -mt-6">
+      <div className="max-w-7xl mx-auto px-4 -mt-6 relative z-20">
         <div className="bg-white rounded-xl shadow-lg p-4 mb-8">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -170,7 +177,7 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Services List - KEEP ORIGINAL ICONS */}
+      {/* Services List */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="space-y-6">
           {filteredServices.map((service) => (
