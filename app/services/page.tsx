@@ -125,6 +125,7 @@ export default function Services() {
   const [expandedSection, setExpandedSection] = useState<string | null>('reservoir')
   const [searchTerm, setSearchTerm] = useState('')
   const [touchActive, setTouchActive] = useState<string | null>(null)
+  const [animatingSection, setAnimatingSection] = useState<string | null>(null)
 
   const filteredServices = servicesData.filter(service =>
     service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -133,7 +134,15 @@ export default function Services() {
   )
 
   const toggleSection = (id: string) => {
+    if (animatingSection) return // Prevent rapid clicks
+    
+    setAnimatingSection(id)
     setExpandedSection(expandedSection === id ? null : id)
+    
+    // Reset animation state after animation completes
+    setTimeout(() => {
+      setAnimatingSection(null)
+    }, 300)
   }
 
   return (
@@ -153,12 +162,12 @@ export default function Services() {
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 py-16">
           <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
-            <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg text-sm font-semibold mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in-up">Our Services</h1>
+            <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg text-sm font-semibold mb-4 animate-fade-in-up" style={{animationDelay: '0.1s'}}>
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
               Provider of Choice for Energy Solutions
             </div>
-            <p className="text-xl text-blue-100">
+            <p className="text-xl text-blue-100 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
               Comprehensive energy solutions across the entire value chain. Explore our seven core service areas.
             </p>
           </div>
@@ -166,7 +175,7 @@ export default function Services() {
       </div>
 
       {/* Search Bar */}
-      <div className="max-w-7xl mx-auto px-4 -mt-6 relative z-20">
+      <div className="max-w-7xl mx-auto px-4 -mt-6 relative z-20 animate-fade-in-up" style={{animationDelay: '0.3s'}}>
         <div className="bg-white rounded-xl shadow-lg p-4 mb-8">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -184,19 +193,28 @@ export default function Services() {
       {/* Services List */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="space-y-6">
-          {filteredServices.map((service) => {
+          {filteredServices.map((service, index) => {
             const expanded = expandedSection === service.id;
+            const isAnimating = animatingSection === service.id;
+            
             return (
               <div
                 key={service.id}
                 id={service.id}
-                className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow touch-manipulation"
+                className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 touch-manipulation animate-fade-in-up ${
+                  expanded ? 'ring-2 ring-blue-500/20' : ''
+                }`}
+                style={{animationDelay: `${0.4 + index * 0.1}s`}}
               >
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-start">
-                      <div className="p-3 rounded-lg bg-blue-50 text-blue-900 mr-4">
-                        {service.icon}
+                      <div className={`p-3 rounded-lg bg-blue-50 text-blue-900 mr-4 transition-all duration-300 ${
+                        expanded ? 'scale-110 bg-gradient-to-br from-blue-100 to-blue-50' : ''
+                      }`}>
+                        <div className={isAnimating ? 'animate-bounce' : ''}>
+                          {service.icon}
+                        </div>
                       </div>
                       <div>
                         <h3
@@ -215,47 +233,59 @@ export default function Services() {
                       aria-label={expanded ? `Collapse ${service.title}` : `Expand ${service.title}`}
                       aria-expanded={expanded}
                       aria-controls={`accordion-panel-${service.id}`}
-                      className={`text-blue-900 hover:text-blue-700 ml-4 flex-shrink-0 focus:ring-2 focus:ring-blue-800 rounded-full p-2 touch-manipulation active:scale-95 transition-transform ${touchActive === service.id ? 'scale-95' : ''}`}
+                      disabled={isAnimating}
+                      className={`text-blue-900 hover:text-blue-700 ml-4 flex-shrink-0 focus:ring-2 focus:ring-blue-800 rounded-full p-2 touch-manipulation transition-all duration-300 ${
+                        expanded ? 'bg-blue-50 rotate-0' : ''
+                      } ${touchActive === service.id ? 'scale-95' : ''} ${isAnimating ? 'animate-pulse' : ''}`}
                     >
-                      {expanded ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+                      {expanded ? <ChevronUp size={24} className="animate-rotate-up" /> : <ChevronDown size={24} className="animate-rotate-down" />}
                     </button>
                   </div>
 
-                  {expanded && (
-                    <div
-                      id={`accordion-panel-${service.id}`}
-                      role="region"
-                      aria-labelledby={`accordion-header-${service.id}`}
-                      className="mt-6 pt-6 border-t border-gray-100"
-                    >
-                      <ul className="space-y-3">
-                        {service.items.map((item, index) => (
-                          <li key={index} className="flex items-start group">
-                            <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
-                              <div className="h-2 w-2 rounded-full bg-blue-900" />
-                            </div>
-                            <span className="text-gray-700 group-hover:text-blue-900 transition-colors">
-                              {item}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
+                  {/* Animated Content Area */}
+                  <div
+                    id={`accordion-panel-${service.id}`}
+                    role="region"
+                    aria-labelledby={`accordion-header-${service.id}`}
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      expanded ? 'max-h-[2000px] opacity-100 mt-6 pt-6 border-t border-gray-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    {expanded && (
+                      <>
+                        <ul className="space-y-3">
+                          {service.items.map((item, itemIndex) => (
+                            <li 
+                              key={itemIndex} 
+                              className="flex items-start group animate-fade-in-left"
+                              style={{animationDelay: `${itemIndex * 0.05}s`}}
+                            >
+                              <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <div className="h-2 w-2 rounded-full bg-blue-900 group-hover:scale-125 transition-transform" />
+                              </div>
+                              <span className="text-gray-700 group-hover:text-blue-900 transition-colors">
+                                {item}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
 
-                      {/* Contact CTA within expanded section */}
-                      <div className="mt-6 pt-6 border-t border-gray-100">
-                        <p className="text-gray-600 mb-4">Interested in this service?</p>
-                        <Link
-                          href="/contact"
-                          className="inline-flex items-center bg-blue-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-800 active:scale-95 transition-all duration-200 touch-manipulation"
-                          onTouchStart={() => setTouchActive(`contact-${service.id}`)}
-                          onTouchEnd={() => setTouchActive(null)}
-                        >
-                          Contact Us for Details
-                          <ArrowRight className={`ml-2 transition-transform ${touchActive === `contact-${service.id}` ? 'translate-x-1' : 'group-hover:translate-x-1'}`} />
-                        </Link>
-                      </div>
-                    </div>
-                  )}
+                        {/* Animated Contact CTA */}
+                        <div className="mt-6 pt-6 border-t border-gray-100 animate-fade-in-up">
+                          <p className="text-gray-600 mb-4">Interested in this service?</p>
+                          <Link
+                            href="/contact"
+                            className="inline-flex items-center bg-blue-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-800 active:scale-95 transition-all duration-200 touch-manipulation group/contact animate-pulse-glow"
+                            onTouchStart={() => setTouchActive(`contact-${service.id}`)}
+                            onTouchEnd={() => setTouchActive(null)}
+                          >
+                            Contact Us for Details
+                            <ArrowRight className={`ml-2 transition-transform ${touchActive === `contact-${service.id}` ? 'translate-x-1' : 'group-hover/contact:translate-x-1'}`} />
+                          </Link>
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             )
@@ -263,7 +293,7 @@ export default function Services() {
         </div>
 
         {filteredServices.length === 0 && (
-          <div className="text-center py-12">
+          <div className="text-center py-12 animate-fade-in-up">
             <div className="text-gray-400 mb-4">
               <Search size={48} className="mx-auto" />
             </div>
@@ -273,16 +303,16 @@ export default function Services() {
         )}
       </div>
 
-      {/* Contact CTA */}
-      <div className="max-w-7xl mx-auto px-4 pb-16">
-        <div className="bg-gradient-to-r from-blue-900 to-blue-800 rounded-xl shadow-lg p-8 text-center">
+      {/* Animated Contact CTA */}
+      <div className="max-w-7xl mx-auto px-4 pb-16 animate-fade-in-up">
+        <div className="bg-gradient-to-r from-blue-900 to-blue-800 rounded-xl shadow-lg p-8 text-center animate-pulse-glow">
           <h2 className="text-2xl font-bold text-white mb-4">Need Custom Energy Solutions?</h2>
           <p className="text-blue-100 mb-6">
             Contact our team of experts to discuss your specific energy project requirements.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 active:scale-95 transition-all duration-200 touch-manipulation"
+            className="inline-flex items-center bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 active:scale-95 transition-all duration-200 touch-manipulation group"
             onTouchStart={() => setTouchActive('main-cta')}
             onTouchEnd={() => setTouchActive(null)}
           >
