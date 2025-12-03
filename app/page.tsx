@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, ChevronRight, Zap, Cpu, Wrench, Leaf, Database, Package, GraduationCap } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { ArrowRight, ChevronRight } from 'lucide-react'
+import { useState } from 'react'
 
 const services = [
   {
@@ -10,67 +10,82 @@ const services = [
     name: 'Reservoir & Subsurface Studies',
     desc: 'Comprehensive characterization & modeling',
     link: '/services#reservoir',
-    icon: <Database className="h-8 w-8" />,
-    color: 'from-blue-600 to-blue-800'
+    image: 'https://i.ibb.co/LfGQQxz/Reservoir-Subsurface-Studies.jpg'
   },
   {
     id: 'field-services',
     name: 'Oil & Gas Field Services',
     desc: 'Advanced oil & gas operations',
     link: '/services#field-services',
-    icon: <Zap className="h-8 w-8" />,
-    color: 'from-blue-700 to-blue-900'
+    image: 'https://i.ibb.co/j9hYK0zV/Oil-Gas-Field-Services.jpg'
   },
   {
     id: 'engineering',
     name: 'Engineering & Technical Services',
     desc: 'End-to-end engineering support',
     link: '/services#engineering',
-    icon: <Wrench className="h-8 w-8" />,
-    color: 'from-blue-800 to-blue-950'
+    image: 'https://i.ibb.co/YBRmWgQN/Engineering-Technical-Services.jpg'
   },
   {
     id: 'supply-chain',
     name: 'Supply Chain & Logistics',
     desc: 'Integrated supply chain solutions',
     link: '/services#supply-chain',
-    icon: <Package className="h-8 w-8" />,
-    color: 'from-blue-600 to-blue-800'
+    image: 'https://i.ibb.co/RGW41mJk/Supply-Chain-Logistics.jpg'
   },
   {
     id: 'clean-energy',
     name: 'Clean Energy Initiatives',
     desc: 'Sustainable energy solutions',
     link: '/services#clean-energy',
-    icon: <Leaf className="h-8 w-8" />,
-    color: 'from-emerald-600 to-green-800'
+    image: 'https://i.ibb.co/0V6FRjgS/Clean-Energy-Initiatives.jpg'
   },
   {
     id: 'digital',
     name: 'Digital Solutions',
     desc: 'AI & technology integration',
     link: '/services#digital',
-    icon: <Cpu className="h-8 w-8" />,
-    color: 'from-cyan-600 to-blue-700'
+    image: 'https://i.ibb.co/VYG9CQpK/Digital-Solutions.jpg'
   },
   {
     id: 'training',
     name: 'Training & Consulting',
     desc: 'Professional development services',
     link: '/services#training',
-    icon: <GraduationCap className="h-8 w-8" />,
-    color: 'from-blue-700 to-blue-900'
+    image: 'https://i.ibb.co/rGjBS3kz/Training-Consulting.jpg'
   }
 ]
 
 export default function Home() {
   const [touchActive, setTouchActive] = useState<string | null>(null)
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
+
+  const handleImageLoad = (id: string) => {
+    setLoadedImages(prev => new Set(prev).add(id))
+  }
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>, serviceName: string) => {
+    const target = e.currentTarget
+    target.style.display = 'none'
+    const parent = target.parentElement
+    if (parent) {
+      // Create fallback with service initial
+      parent.innerHTML = `
+        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
+          <div class="text-center p-4">
+            <div class="text-3xl font-bold text-blue-900 mb-2">${serviceName.charAt(0)}</div>
+            <div class="font-bold text-blue-900 text-sm">${serviceName.split(' ')[0]}</div>
+          </div>
+        </div>
+      `
+    }
+  }
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Professional */}
+      {/* Hero Section */}
       <div className="relative bg-gradient-to-r from-blue-900 to-blue-800 text-white">
-        {/* Subtle Pattern Background */}
+        {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -127,7 +142,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Services Overview - Touch Friendly */}
+      {/* Services Overview - With Your Images */}
       <section className="py-16 bg-gradient-to-b from-white to-blue-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -149,22 +164,42 @@ export default function Home() {
                   e.currentTarget.classList.add('active:scale-[0.98]')
                 }}
               >
-                {/* Animated Background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 group-active:opacity-20 transition-opacity duration-300`}></div>
-                
-                {/* Service Icon */}
-                <div className="p-6 pb-0">
-                  <div className={`inline-flex p-3 rounded-lg bg-gradient-to-br ${service.color} text-white mb-4 group-active:scale-95 transition-transform`}>
-                    {service.icon}
+                {/* Service Image with Loading State */}
+                <div className="h-48 relative overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100">
+                  {/* Loading Skeleton */}
+                  {!loadedImages.has(service.id) && (
+                    <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-blue-100 to-blue-200"></div>
+                  )}
+                  
+                  {/* Actual Image */}
+                  <img
+                    src={service.image}
+                    alt={service.name}
+                    className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+                      loadedImages.has(service.id) ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    loading="lazy"
+                    onLoad={() => handleImageLoad(service.id)}
+                    onError={(e) => handleImageError(e, service.name)}
+                  />
+                  
+                  {/* Image Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+                  
+                  {/* Service Indicator */}
+                  <div className="absolute top-4 left-4 z-20">
+                    <div className="w-10 h-10 rounded-lg bg-white/90 backdrop-blur-sm flex items-center justify-center">
+                      <div className="w-3 h-3 bg-blue-900 rounded-full"></div>
+                    </div>
                   </div>
                 </div>
                 
                 {/* Service Content */}
-                <div className="p-6 pt-0">
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-900 transition-colors">
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-900 transition-colors line-clamp-2">
                     {service.name}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                     {service.desc}
                   </p>
                   <div className="flex items-center text-blue-900 font-medium text-sm">
@@ -172,6 +207,9 @@ export default function Home() {
                     <ChevronRight className="ml-1 group-hover:translate-x-1 group-active:translate-x-1 transition-transform" />
                   </div>
                 </div>
+                
+                {/* Hover Border Effect */}
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-900/10 rounded-xl transition-colors duration-300 pointer-events-none"></div>
                 
                 {/* Touch Feedback Indicator */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300"></div>
