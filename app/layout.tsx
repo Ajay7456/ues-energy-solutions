@@ -3,6 +3,7 @@
 import './globals.css'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import ContactFormModal from '@/components/ContactFormModal'
 
 export default function RootLayout({
   children,
@@ -10,6 +11,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -37,16 +39,15 @@ export default function RootLayout({
       </head>
       <body>
         {/* Navigation */}
-        <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-lg">
+        <nav className="fixed top-0 w-full z-40 bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-lg">
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex justify-between items-center h-20">
               {/* Logo */}
               <Link href="/" className="flex items-center group">
                 <div className="relative h-12 w-12 rounded-full bg-white flex items-center justify-center mr-3 
                               transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg">
-                  {/* Simple image without onError handler */}
                   <img
-                    src="https://i.imgur.com/fHC1NZ4.png"
+                    src="https://i.ibb.co/HpG3SQVm/logo.png"
                     alt="UES Energy Solutions Logo"
                     className="h-10 w-10 object-contain"
                   />
@@ -85,16 +86,17 @@ export default function RootLayout({
                   </Link>
                 ))}
                 
-                <Link
-                  href="/contact"
-                  className="relative ml-4 px-6 py-2.5 rounded-lg font-medium overflow-hidden group/cta"
+                {/* Get Quote Button */}
+                <button
+                  onClick={() => setIsContactModalOpen(true)}
+                  className="relative ml-4 px-6 py-2.5 rounded-lg font-medium overflow-hidden group/cta touch-manipulation"
                 >
                   <span className="relative z-10 text-white">Get Quote</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 
                                 transition-all duration-500 group-hover/cta:from-blue-700 group-hover/cta:to-blue-900"></div>
                   <div className="absolute inset-0 -translate-x-full group-hover/cta:translate-x-full 
                                 transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-                </Link>
+                </button>
               </div>
 
               {/* Mobile Menu Button */}
@@ -130,13 +132,15 @@ export default function RootLayout({
               Contact
             </Link>
             <div className="px-4 py-3">
-              <Link
-                href="/contact"
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  setIsContactModalOpen(true)
+                }}
                 className="block w-full bg-blue-900 text-white text-center px-6 py-3 rounded-lg hover:bg-blue-800 transition-colors font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Get Quote
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -149,6 +153,12 @@ export default function RootLayout({
           {children}
         </main>
 
+        {/* Contact Form Modal */}
+        <ContactFormModal 
+          isOpen={isContactModalOpen} 
+          onClose={() => setIsContactModalOpen(false)} 
+        />
+
         {/* Footer */}
         <footer className="bg-blue-900 text-white">
           <div className="max-w-7xl mx-auto px-4 py-12">
@@ -156,9 +166,8 @@ export default function RootLayout({
               <div>
                 <div className="flex items-center mb-4">
                   <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center mr-3">
-                    {/* Simple image without onError handler */}
                     <img
-                      src="https://i.imgur.com/fHC1NZ4.png"
+                      src="https://i.ibb.co/HpG3SQVm/logo.png"
                       alt="UES Energy Solutions Logo"
                       className="h-8 w-8 object-contain"
                     />
