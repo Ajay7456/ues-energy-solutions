@@ -69,7 +69,6 @@ export default function Home() {
     target.style.display = 'none'
     const parent = target.parentElement
     if (parent) {
-      // Create fallback with service initial
       parent.innerHTML = `
         <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
           <div class="text-center p-4">
@@ -103,9 +102,8 @@ export default function Home() {
               </div>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Integrated Energy Solutions
-              <span className="block text-blue-200 mt-2">for Africa & Beyond</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-blue-300">
+              UES Energy Solutions Limited
             </h1>
             
             <p className="text-lg md:text-xl text-blue-100 mb-8 leading-relaxed">
@@ -171,20 +169,17 @@ export default function Home() {
                     <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-blue-100 to-blue-200"></div>
                   )}
                   
-                  {/* Actual Image */}
+                  {/* Actual Image - object-contain for full visibility */}
                   <img
                     src={service.image}
                     alt={service.name}
-                    className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+                    className={`w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500 ${
                       loadedImages.has(service.id) ? 'opacity-100' : 'opacity-0'
                     }`}
                     loading="lazy"
                     onLoad={() => handleImageLoad(service.id)}
                     onError={(e) => handleImageError(e, service.name)}
                   />
-                  
-                  {/* Image Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
                   
                   {/* Service Indicator */}
                   <div className="absolute top-4 left-4 z-20">
