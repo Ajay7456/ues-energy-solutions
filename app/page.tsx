@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import ServiceImage from '@/components/ServiceImage'
 
 export default function Home() {
   const services = [
@@ -126,27 +127,13 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, idx) => (
               <div key={service.id} className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                {/* Service Image */}
+                {/* Service Image - USING CLIENT COMPONENT */}
                 <div className="h-48 relative overflow-hidden bg-blue-50">
-                  <img
+                  <ServiceImage
                     src={service.image}
                     alt={service.name}
+                    serviceName={service.name}
                     className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                      // Fallback to colored background with text
-                      e.currentTarget.style.display = 'none';
-                      const parent = e.currentTarget.parentElement;
-                      if (parent) {
-                        parent.innerHTML = `
-                          <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
-                            <div class="text-center p-4">
-                              <div class="text-3xl mb-2">${service.name.split(' ')[0].charAt(0)}</div>
-                              <div class="font-bold text-blue-900">${service.name.split(' ')[0]}</div>
-                            </div>
-                          </div>
-                        `;
-                      }
-                    }}
                   />
                 </div>
                 
