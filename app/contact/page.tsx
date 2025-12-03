@@ -96,13 +96,7 @@ export default function Contact() {
                   Need immediate assistance? Send us a message and we'll respond within 24 hours.
                 </p>
                 <Link
-                  href="/"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    // This would trigger the contact form modal from layout
-                    const event = new CustomEvent('open-contact-modal')
-                    window.dispatchEvent(event)
-                  }}
+                  href="/#contact-form"  // Changed to a simple link
                   className="w-full bg-white text-blue-900 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors block text-center"
                 >
                   Send Quick Message
