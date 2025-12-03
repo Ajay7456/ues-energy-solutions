@@ -44,14 +44,10 @@ export default function RootLayout({
               <Link href="/" className="flex items-center group">
                 <div className="relative h-12 w-12 rounded-full bg-white flex items-center justify-center mr-3 
                               transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg">
-                  {/* Logo Image */}
                   <img
                     src="https://i.imgur.com/fHC1NZ4.png"
                     alt="UES Energy Solutions Logo"
                     className="h-10 w-10 object-contain"
-                    onError={(e) => {
-                      e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiMwQTI0NjMiLz4KPHRleHQgeD0iMjAiIHk9IjI1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNGRkZGRkYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlVFUzwvdGV4dD4KPC9zdmc+'
-                    }}
                   />
                 </div>
                 <div className="transition-all duration-300 group-hover:translate-x-1">
@@ -155,14 +151,10 @@ export default function RootLayout({
               <div>
                 <div className="flex items-center mb-4">
                   <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center mr-3">
-                    {/* Logo in Footer */}
                     <img
                       src="https://i.imgur.com/fHC1NZ4.png"
                       alt="UES Energy Solutions Logo"
                       className="h-8 w-8 object-contain"
-                      onError={(e) => {
-                        e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiMwQTI0NjMiLz4KPHRleHQgeD0iMTYiIHk9IjIxIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiNGRkZGRkYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlVFUzwvdGV4dD4KPC9zdmc+'
-                      }}
                     />
                   </div>
                   <div>
