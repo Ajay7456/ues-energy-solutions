@@ -70,9 +70,9 @@ export default function Home() {
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 py-24 md:py-32">
           <div className="max-w-3xl">
-            {/* Tagline */}
+            {/* Tagline - SHARP EDGES */}
             <div className="mb-6">
-              <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-4">
+              <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-none text-sm font-semibold mb-4">
                 Provider of Choice for Energy Solutions
               </span>
             </div>
@@ -82,7 +82,11 @@ export default function Home() {
               <span className="text-blue-300"> Africa & Beyond</span>
             </h1>
             <p className="text-xl text-blue-100 mb-8">
-              Delivering innovative, reliable, and sustainable energy solutions that optimize performance and maximize resource recovery.
+              UES Energy Solutions Nigeria Limited is an integrated energy services company 
+              specializing in comprehensive solutions across the oil & gas value chain, with 
+              strong capabilities in upstream operations, sustainability, and digital innovation. 
+              The firm supports exploration, production, and energy transition initiatives 
+              through technical expertise, operational efficiency, and local content compliance.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
