@@ -33,7 +33,6 @@ export default function About() {
           {/* Mission Card */}
           <div className="bg-gradient-to-br from-blue-900 to-blue-800 text-white rounded-xl shadow-lg p-8">
             <div className="flex items-center mb-6">
-              {/* Removed Icon */}
               <h2 className="text-2xl font-bold">Our Mission</h2>
             </div>
             <p className="text-lg text-blue-100 leading-relaxed">
@@ -44,7 +43,6 @@ export default function About() {
           {/* Vision Card */}
           <div className="bg-gradient-to-br from-blue-800 to-blue-900 text-white rounded-xl shadow-lg p-8">
             <div className="flex items-center mb-6">
-              {/* Removed Icon */}
               <h2 className="text-2xl font-bold">Our Vision</h2>
             </div>
             <p className="text-lg text-blue-100 leading-relaxed">
@@ -53,15 +51,16 @@ export default function About() {
           </div>
         </div>
 
-        {/* Our Values Section */}
+        {/* Our Values Section with Underlines */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-gray-800 mb-12 text-center">Our Values</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Reliability */}
             <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 group">
-              {/* Removed Icon */}
-              <h3 className="text-xl font-bold text-blue-900 mb-3">Reliability</h3>
+              <h3 className="text-xl font-bold text-blue-900 mb-3 border-b-2 border-blue-900 pb-2">
+                Reliability
+              </h3>
               <p className="text-gray-600">
                 Consistently delivering on our promises with unwavering commitment to operational excellence and dependable service delivery across all our engagements.
               </p>
@@ -69,8 +68,9 @@ export default function About() {
 
             {/* Integrity */}
             <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 group">
-              {/* Removed Icon */}
-              <h3 className="text-xl font-bold text-blue-900 mb-3">Integrity</h3>
+              <h3 className="text-xl font-bold text-blue-900 mb-3 border-b-2 border-blue-900 pb-2">
+                Integrity
+              </h3>
               <p className="text-gray-600">
                 Operating with transparency, honesty, and the highest ethical standards in all business dealings, building trust with clients, partners, and stakeholders.
               </p>
@@ -78,8 +78,9 @@ export default function About() {
 
             {/* Team Work */}
             <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 group">
-              {/* Removed Icon */}
-              <h3 className="text-xl font-bold text-blue-900 mb-3">Team Work</h3>
+              <h3 className="text-xl font-bold text-blue-900 mb-3 border-b-2 border-blue-900 pb-2">
+                Team Work
+              </h3>
               <p className="text-gray-600">
                 Fostering collaborative environments where diverse expertise converges to achieve shared success, driving innovation through collective effort.
               </p>
@@ -87,8 +88,9 @@ export default function About() {
 
             {/* Expertise */}
             <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 group">
-              {/* Removed Icon */}
-              <h3 className="text-xl font-bold text-blue-900 mb-3">Expertise</h3>
+              <h3 className="text-xl font-bold text-blue-900 mb-3 border-b-2 border-blue-900 pb-2">
+                Expertise
+              </h3>
               <p className="text-gray-600">
                 Leveraging deep technical knowledge, continuous learning, and innovative thinking to deliver superior solutions and maintain industry leadership.
               </p>
