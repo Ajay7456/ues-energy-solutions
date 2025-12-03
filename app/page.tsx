@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function Home() {
   const services = [
@@ -8,50 +7,49 @@ export default function Home() {
       name: 'Reservoir & Subsurface Studies',
       desc: 'Comprehensive characterization & modeling',
       link: '/services#reservoir',
-      // Using Unsplash energy-related placeholder images
-      image: 'https://images.unsplash.com/photo-1600712242805-5f78671b24da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      image: 'https://i.imgur.com/a/E41EXF4.png'
     },
     {
       id: 'field-services',
       name: 'Oil & Gas Field Services',
       desc: 'Advanced oil & gas operations',
       link: '/services#field-services',
-      image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      image: 'https://i.imgur.com/a/sRnKQ2F.png'
     },
     {
       id: 'engineering',
       name: 'Engineering & Technical Services',
       desc: 'End-to-end engineering support',
       link: '/services#engineering',
-      image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      image: 'https://i.imgur.com/a/z2IykSo.png'
     },
     {
       id: 'supply-chain',
       name: 'Supply Chain & Logistics',
       desc: 'Integrated supply chain solutions',
       link: '/services#supply-chain',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      image: 'https://i.imgur.com/a/H7WJqps.png'
     },
     {
       id: 'clean-energy',
       name: 'Clean Energy Initiatives',
       desc: 'Sustainable energy solutions',
       link: '/services#clean-energy',
-      image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      image: 'https://i.imgur.com/a/aamdH0F.pmg'
     },
     {
       id: 'digital',
       name: 'Digital Solutions',
       desc: 'AI & technology integration',
       link: '/services#digital',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      image: 'https://i.imgur.com/a/70amxo6'
     },
     {
       id: 'training',
       name: 'Training & Consulting',
       desc: 'Professional development services',
       link: '/services#training',
-      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      image: 'https://i.imgur.com/a/SbjLmwJ'
     }
   ]
 
@@ -121,30 +119,39 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, idx) => (
               <div key={service.id} className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 {/* Service Image */}
                 <div className="h-48 relative overflow-hidden bg-blue-50">
                   <img
                     src={service.image}
                     alt={service.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
                     onError={(e) => {
-                      // Fallback if image fails to load
-                      e.currentTarget.src = `https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80`;
+                      // Fallback to colored background with text
+                      e.currentTarget.style.display = 'none';
+                      const parent = e.currentTarget.parentElement;
+                      if (parent) {
+                        parent.innerHTML = `
+                          <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
+                            <div class="text-center p-4">
+                              <div class="text-3xl mb-2">${service.name.split(' ')[0].charAt(0)}</div>
+                              <div class="font-bold text-blue-900">${service.name.split(' ')[0]}</div>
+                            </div>
+                          </div>
+                        `;
+                      }
                     }}
                   />
-                  {/* Gradient overlay for better text contrast if needed */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
                 </div>
                 
                 {/* Service Info */}
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">
+                  <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2">
                     {service.name}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                     {service.desc}
                   </p>
                   <Link 
@@ -155,6 +162,9 @@ export default function Home() {
                     <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
                 </div>
+                
+                {/* Hover Effect Border */}
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-900/20 rounded-xl transition-colors duration-300 pointer-events-none"></div>
               </div>
             ))}
           </div>
