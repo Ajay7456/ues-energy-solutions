@@ -7,49 +7,49 @@ export default function Home() {
       name: 'Reservoir & Subsurface Studies',
       desc: 'Comprehensive characterization & modeling',
       link: '/services#reservoir',
-      image: 'https://i.imgur.com/a/E41EXF4.png'
+      image: 'https://i.imgur.com/E41EXF4.png'
     },
     {
       id: 'field-services',
       name: 'Oil & Gas Field Services',
       desc: 'Advanced oil & gas operations',
       link: '/services#field-services',
-      image: 'https://i.imgur.com/a/sRnKQ2F.png'
+      image: 'https://i.imgur.com/sRnKQ2F.png'
     },
     {
       id: 'engineering',
       name: 'Engineering & Technical Services',
       desc: 'End-to-end engineering support',
       link: '/services#engineering',
-      image: 'https://i.imgur.com/a/z2IykSo.png'
+      image: 'https://i.imgur.com/z2IykSo.png'
     },
     {
       id: 'supply-chain',
       name: 'Supply Chain & Logistics',
       desc: 'Integrated supply chain solutions',
       link: '/services#supply-chain',
-      image: 'https://i.imgur.com/a/H7WJqps.png'
+      image: 'https://i.imgur.com/H7WJqps.png'
     },
     {
       id: 'clean-energy',
       name: 'Clean Energy Initiatives',
       desc: 'Sustainable energy solutions',
       link: '/services#clean-energy',
-      image: 'https://i.imgur.com/a/aamdH0F.pmg'
+      image: 'https://i.imgur.com/aamdH0F.png'
     },
     {
       id: 'digital',
       name: 'Digital Solutions',
       desc: 'AI & technology integration',
       link: '/services#digital',
-      image: 'https://i.imgur.com/a/70amxo6'
+      image: 'https://i.imgur.com/70amxo6.png'
     },
     {
       id: 'training',
       name: 'Training & Consulting',
       desc: 'Professional development services',
       link: '/services#training',
-      image: 'https://i.imgur.com/a/SbjLmwJ'
+      image: 'https://i.imgur.com/SbjLmwJ.png'
     }
   ]
 
