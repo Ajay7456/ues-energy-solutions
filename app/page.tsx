@@ -10,29 +10,28 @@ const services = [
     name: 'Reservoir & Subsurface Studies',
     desc: 'Comprehensive characterization & modeling',
     link: '/services#reservoir',
-    image: 'https://i.ibb.co/LfGQQxz/Reservoir-Subsurface-Studies.jpg'
+    image: 'https://i.ibb.co/4gKggjXs/Reservoir-Subsurface-Studies.jpg' // UPDATED
   },
   {
     id: 'field-services',
     name: 'Oil & Gas Field Services',
     desc: 'Advanced oil & gas operations',
     link: '/services#field-services',
-    image: 'https://i.ibb.co/j9hYK0zV/Oil-Gas-Field-Services.jpg'
+    image: 'https://i.ibb.co/xS7dpGnB/Oil-Gas-Field-Services.jpg' // UPDATED
   },
   {
     id: 'engineering',
     name: 'Engineering & Technical Services',
     desc: 'End-to-end engineering support',
     link: '/services#engineering',
-    image: 'https://i.ibb.co/YBRmWgQN/Engineering-Technical-Services.jpg'
+    image: 'https://i.ibb.co/h11s2kJn/Engineering-Technical-Services.jpg' // UPDATED
   },
   {
     id: 'supply-chain',
     name: 'Supply Chain & Logistics',
     desc: 'Integrated supply chain solutions',
     link: '/services#supply-chain',
-    image: 'https://i.ibb.co/XZvmBtkD/Supply-Chain-Logistics.jpg', // UPDATED URL
-    extraPadding: true
+    image: 'https://i.ibb.co/wNWXR3DD/Supply-Chain-Logistics.jpg' // UPDATED
   }
 ]
 
@@ -59,7 +58,8 @@ export default function Home() {
               </div>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-blue-300">
+            {/* Updated Title - Single line, smaller but bold */}
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 leading-snug">
               UES Energy Solutions Limited
             </h1>
             
@@ -114,20 +114,18 @@ export default function Home() {
                 href={service.link}
                 className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
               >
-                <div className={`relative overflow-hidden bg-blue-50 ${service.extraPadding ? 'h-56' : 'h-48'}`}>
-                  <div className={`absolute inset-0 flex items-center justify-center ${service.extraPadding ? 'p-1' : 'p-4'}`}>
+                {/* 4:3 Aspect Ratio Container */}
+                <div className="relative overflow-hidden bg-blue-50 pt-[75%]"> {/* 4:3 = 75% padding-top */}
+                  <div className="absolute inset-0 flex items-center justify-center">
                     <img
                       src={service.image}
                       alt={service.name}
-                      className={`max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500 ${
-                        service.extraPadding ? 'scale-110' : ''
-                      }`}
+                      className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                       style={{
-                        width: 'auto',
-                        height: 'auto',
-                        maxWidth: '100%',
-                        maxHeight: '100%'
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain'
                       }}
                     />
                   </div>
