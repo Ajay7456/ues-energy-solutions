@@ -31,7 +31,7 @@ const services = [
     name: 'Supply Chain & Logistics',
     desc: 'Integrated supply chain solutions',
     link: '/services#supply-chain',
-    image: 'https://i.ibb.co/RGW41mJk/Supply-Chain-Logistics.jpg',
+    image: 'https://i.ibb.co/MyYYy5h8/Supply-Chain-Logistics.jpg', // UPDATED URL
     extraPadding: true
   }
 ]
