@@ -27,14 +27,14 @@ export default function ContactFormModal({ isOpen, onClose }: ContactFormModalPr
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          access_key: '2075ee0a-4b5d-42df-890b-25974067b6a2', // YOUR API KEY
+          access_key: '05c5b889-b1a8-4f2b-9715-b4e5ad8d42ae', // YOUR API KEY
           name: form.name,
           email: form.email,
           message: form.message,
           subject: `New Quote Request - ${form.name}`,
           from_name: 'UES Website',
           botcheck: '',
-          to: 'info@uesenergysolutions.com,ceo@uesenergysolutions.com,ajay745626@gmail.com'
+          to: 'info@uesenergysolutions.com,ceo@uesenergysolutions.com'
         })
       })
       
