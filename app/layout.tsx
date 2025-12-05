@@ -169,7 +169,7 @@ export default function RootLayout({
                   </div>
                   <div>
                     <span className="text-base font-bold block">UES Energy Solutions Limited</span>
-                    <span className="text-blue-200 text-sm block">Provider of Choice</span>
+                    <span className="text-blue-200 text-sm block">Choice Provider for Energy Solutions</span>
                   </div>
                 </div>
                 <p className="text-blue-200">Innovative energy solutions across Africa</p>
