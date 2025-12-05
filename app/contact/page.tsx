@@ -22,14 +22,14 @@ export default function Contact() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          access_key: '2075ee0a-4b5d-42df-890b-25974067b6a2',
+          access_key: '05c5b889-b1a8-4f2b-9715-b4e5ad8d42ae',
           name: form.name,
           email: form.email,
           message: form.message,
           subject: `New Contact Form - ${form.name}`,
           from_name: 'UES Website',
           botcheck: '',
-          to: 'info@uesenergysolutions.com,ceo@uesenergysolutions.com,ajay745626@gmail.com'
+          to: 'info@uesenergysolutions.com,ceo@uesenergysolutions.com'
         })
       })
       
@@ -131,15 +131,15 @@ export default function Contact() {
                     <div className="space-y-2 text-gray-600">
                       <div className="flex justify-between">
                         <span className="font-medium">Monday - Friday:</span>
-                        <span>8:00 AM - 5:00 PM</span>
+                        <span className="ml-8">8:00 AM - 5:00 PM</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="font-medium">Saturday:</span>
-                        <span>9:00 AM - 1:00 PM</span>
+                        <span className="ml-8">9:00 AM - 1:00 PM</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="font-medium">Sunday:</span>
-                        <span>Closed</span>
+                        <span className="ml-8">Closed</span>
                       </div>
                     </div>
                   </div>
