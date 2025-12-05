@@ -3,113 +3,102 @@ import nodemailer from 'nodemailer'
 
 export async function POST(request: NextRequest) {
   try {
-    // Get form data from request
+    // Get form data
     const { name, email, message, source = 'Contact Form' } = await request.json()
 
-    // Validate required fields
+    // Simple validation
     if (!name || !email || !message) {
       return NextResponse.json(
-        { success: false, message: 'All fields are required' },
+        { success: false, message: 'Please fill all fields' },
         { status: 400 }
       )
     }
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid email format' },
-        { status: 400 }
-      )
-    }
-
-    // Create email transporter
+    // SIMPLE EMAIL CONFIGURATION
+    // Uses your existing email - NO THIRD PARTY SERVICES
+    
     const transporter = nodemailer.createTransport({
+      // Method 1: Try Gmail first (works for most emails)
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.YOUR_EMAIL,      // Your email address
+        pass: process.env.YOUR_PASSWORD,   // Your email password
       },
     })
 
-    // Email content
-    const mailOptions = {
-      from: `UES Website <${process.env.EMAIL_USER}>`,
-      to: 'info@uesenergysolutions.com',
-      cc: 'ceo@uesenergysolutions.com',
-      subject: `New ${source} - ${name}`,
+    // Send email
+    await transporter.sendMail({
+      from: `"UES Website" <${process.env.YOUR_EMAIL}>`, // Shows as "UES Website"
+      to: 'info@uesenergysolutions.com',                // Where to send
+      cc: 'ceo@uesenergysolutions.com',                 // Copy to CEO
+      replyTo: email,                                   // User's email for reply
+      subject: `New Message from ${name} - UES Website`,
       text: `
-UES Energy Solutions - New ${source}
+New ${source} Submission
 
 Name: ${name}
 Email: ${email}
-Message: ${message}
+Message:
+${message}
 
 ---
 Sent from UES Energy Solutions Website
       `,
       html: `
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: linear-gradient(to right, #1e40af, #1e3a8a); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
-    .content { background: #f8fafc; padding: 30px; border-radius: 0 0 8px 8px; border: 1px solid #e2e8f0; }
-    .field { margin-bottom: 15px; }
-    .label { font-weight: bold; color: #1e40af; display: block; margin-bottom: 5px; }
-    .value { padding: 10px; background: white; border-radius: 4px; border: 1px solid #e2e8f0; }
-    .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 12px; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h2>UES Energy Solutions - New ${source}</h2>
-    </div>
-    <div class="content">
-      <div class="field">
-        <span class="label">Name</span>
-        <div class="value">${name}</div>
-      </div>
-      <div class="field">
-        <span class="label">Email</span>
-        <div class="value">${email}</div>
-      </div>
-      <div class="field">
-        <span class="label">Message</span>
-        <div class="value">${message.replace(/\n/g, '<br>')}</div>
-      </div>
-      <div class="footer">
-        <p>Sent from UES Energy Solutions Website Contact Form</p>
-      </div>
+<div style="font-family: Arial, sans-serif; padding: 20px;">
+  <h2 style="color: #1e40af;">New ${source} Submission</h2>
+  <div style="background: #f8fafc; padding: 15px; border-radius: 5px;">
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Message:</strong></p>
+    <div style="background: white; padding: 10px; margin: 10px 0; border-left: 3px solid #1e40af;">
+      ${message.replace(/\n/g, '<br>')}
     </div>
   </div>
-</body>
-</html>
+  <p style="color: #666; font-size: 12px; margin-top: 20px;">
+    Sent from UES Energy Solutions Website
+  </p>
+</div>
       `,
-    }
+    })
 
-    // Send email
-    await transporter.sendMail(mailOptions)
-
-    return NextResponse.json(
-      { 
-        success: true, 
-        message: 'Email sent successfully' 
-      },
-      { status: 200 }
-    )
+    return NextResponse.json({ 
+      success: true,
+      message: 'Message sent successfully!' 
+    })
 
   } catch (error) {
-    console.error('Email sending error:', error)
-    return NextResponse.json(
-      { 
-        success: false, 
-        message: 'Failed to send email. Please try again later.' 
-      },
-      { status: 500 }
-    )
+    console.error('Email error:', error)
+    
+    // Try alternative SMTP if Gmail fails
+    try {
+      const transporter2 = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: {
+          user: process.env.YOUR_EMAIL,
+          pass: process.env.YOUR_PASSWORD,
+        },
+      })
+
+      await transporter2.sendMail({
+        from: process.env.YOUR_EMAIL,
+        to: 'info@uesenergysolutions.com',
+        subject: `New Message from ${name}`,
+        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      })
+
+      return NextResponse.json({ success: true })
+
+    } catch (fallbackError) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: 'Email service temporarily unavailable. Please email us directly at info@uesenergysolutions.com' 
+        },
+        { status: 500 }
+      )
+    }
   }
 }
