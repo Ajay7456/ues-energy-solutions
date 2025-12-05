@@ -15,22 +15,25 @@ export default function Contact() {
     setError('')
     
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://formsubmit.co/ajax/info@uesenergysolutions.com', {
         method: 'POST',
-        headers: {
+        headers: { 
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
           name: form.name,
           email: form.email,
           message: form.message,
-          source: 'Contact Form'
+          _subject: 'New Contact Form Submission - UES Website',
+          _cc: 'ceo@uesenergysolutions.com',
+          _template: 'table'  // Better email template
         })
       })
       
       const data = await response.json()
       
-      if (data.success) {
+      if (response.ok && data.success === true) {
         setSubmitted(true)
         setForm({ name: '', email: '', message: '' })
         setTimeout(() => setSubmitted(false), 5000)
@@ -39,7 +42,7 @@ export default function Contact() {
       }
     } catch (error) {
       console.error('Error:', error)
-      setError('Failed to send message. Please try again or email us directly at info@uesenergysolutions.com')
+      setError('Failed to send message. Please check your email verification or try again.')
     } finally {
       setSubmitting(false)
     }
@@ -118,20 +121,20 @@ export default function Contact() {
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <div className="flex items-start">
                   <Clock className="h-6 w-6 text-blue-900 mr-4 mt-1" />
-                  <div className="w-full">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-4">Business Hours</h3>
-                    <div className="space-y-3 text-gray-600">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-800">Monday - Friday:</span>
-                        <span className="text-gray-600 ml-4">8:00 AM - 5:00 PM</span>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Business Hours</h3>
+                    <div className="space-y-2 text-gray-600">
+                      <div className="flex justify-between">
+                        <span className="font-medium">Monday - Friday:</span>
+                        <span>8:00 AM - 5:00 PM</span>
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-800">Saturday:</span>
-                        <span className="text-gray-600 ml-4">9:00 AM - 1:00 PM</span>
+                      <div className="flex justify-between">
+                        <span className="font-medium">Saturday:</span>
+                        <span>9:00 AM - 1:00 PM</span>
                       </div>
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-800">Sunday:</span>
-                        <span className="text-gray-600 ml-4">Closed</span>
+                      <div className="flex justify-between">
+                        <span className="font-medium">Sunday:</span>
+                        <span>Closed</span>
                       </div>
                     </div>
                   </div>
@@ -188,7 +191,7 @@ export default function Contact() {
                     <CheckCircle className="text-green-600" size={24} />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-800 mb-2">Message Sent Successfully!</h3>
-                  <p className="text-gray-600">Thank you for contacting us. We'll get back to you within 24 hours.</p>
+                  <p className="text-gray-600">We'll contact you within 24 hours.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
