@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>UES Energy Solutions Limited | Provider of Choice for Energy Solutions</title>
+        <title>UES Energy Solutions Limited | Choice Provider for Energy Solutions</title>
         <meta name="description" content="Innovative, reliable, and sustainable energy solutions across Africa and beyond." />
       </head>
       <body>
