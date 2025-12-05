@@ -162,7 +162,7 @@ export default function Services() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in-up">Our Services</h1>
             <div className="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg text-sm font-semibold mb-4 animate-fade-in-up" style={{animationDelay: '0.1s'}}>
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-              Provider of Choice for Energy Solutions
+              Choice Provider for Energy Solutions
             </div>
             <p className="text-xl text-blue-100 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
               Comprehensive energy solutions across the entire value chain. Explore our seven core service areas.
