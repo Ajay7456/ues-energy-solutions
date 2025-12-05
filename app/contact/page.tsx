@@ -29,7 +29,7 @@ export default function Contact() {
           subject: `New Contact Form - ${form.name}`,
           from_name: 'UES Website',
           botcheck: '',
-          to: 'info@uesenergysolutions.com,ceo@uesenergysolutions.com'
+          to: 'info@uesenergysolutions.com,05c5b889-b1a8-4f2b-9715-b4e5ad8d42ae'
         })
       })
       
@@ -96,9 +96,6 @@ export default function Contact() {
                       <a href="mailto:info@uesenergysolutions.com" className="text-blue-900 hover:text-blue-700 block">
                         info@uesenergysolutions.com
                       </a>
-                      <a href="mailto:ceo@uesenergysolutions.com" className="text-blue-900 hover:text-blue-700 block">
-                        ceo@uesenergysolutions.com
-                      </a>
                     </div>
                   </div>
                 </div>
@@ -131,15 +128,15 @@ export default function Contact() {
                     <div className="space-y-2 text-gray-600">
                       <div className="flex justify-between">
                         <span className="font-medium">Monday - Friday:</span>
-                        <span className="ml-8">8:00 AM - 5:00 PM</span>
+                        <span>8:00 AM / 5:00 PM</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="font-medium">Saturday:</span>
-                        <span className="ml-8">9:00 AM - 1:00 PM</span>
+                        <span>9:00 AM / 1:00 PM</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="font-medium">Sunday:</span>
-                        <span className="ml-8">Closed</span>
+                        <span>Closed</span>
                       </div>
                     </div>
                   </div>
