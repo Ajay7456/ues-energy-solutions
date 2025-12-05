@@ -8,7 +8,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">About UES Energy Solutions</h1>
           <p className="text-xl text-blue-100">
-            Provider of Choice for Energy Solutions across Africa and beyond
+            Choice Provider for Energy Solutions across Africa and beyond
           </p>
         </div>
       </div>
