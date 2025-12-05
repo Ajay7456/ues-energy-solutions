@@ -15,8 +15,7 @@ export default function Contact() {
     setError('')
     
     try {
-      // Using Formspree as a reliable alternative to formsubmit.co
-      const response = await fetch('https://formspree.io/f/xdorabgb', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,21 +24,22 @@ export default function Contact() {
           name: form.name,
           email: form.email,
           message: form.message,
-          _subject: 'New Contact Form Submission - UES Energy Solutions',
-          _cc: 'ceo@uesenergysolutions.com'
+          source: 'Contact Form'
         })
       })
       
-      if (response.ok) {
+      const data = await response.json()
+      
+      if (data.success) {
         setSubmitted(true)
         setForm({ name: '', email: '', message: '' })
         setTimeout(() => setSubmitted(false), 5000)
       } else {
-        throw new Error('Failed to send message')
+        throw new Error(data.message || 'Failed to send message')
       }
     } catch (error) {
       console.error('Error:', error)
-      setError('Failed to send message. Please try again or email us directly.')
+      setError('Failed to send message. Please try again or email us directly at info@uesenergysolutions.com')
     } finally {
       setSubmitting(false)
     }
@@ -114,7 +114,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Hours - Updated spacing */}
+              {/* Hours */}
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <div className="flex items-start">
                   <Clock className="h-6 w-6 text-blue-900 mr-4 mt-1" />
@@ -188,7 +188,7 @@ export default function Contact() {
                     <CheckCircle className="text-green-600" size={24} />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-800 mb-2">Message Sent Successfully!</h3>
-                  <p className="text-gray-600">We'll contact you within 24 hours at {form.email}.</p>
+                  <p className="text-gray-600">Thank you for contacting us. We'll get back to you within 24 hours.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -248,10 +248,6 @@ export default function Contact() {
                       </>
                     )}
                   </button>
-                  
-                  <p className="text-xs text-gray-500 text-center mt-4">
-                    Your message will be sent to info@uesenergysolutions.com with CC to ceo@uesenergysolutions.com
-                  </p>
                 </form>
               )}
             </div>
