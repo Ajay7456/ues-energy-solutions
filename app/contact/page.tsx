@@ -110,11 +110,11 @@ export default function Contact() {
                     <div className="space-y-4 text-gray-600">
                       <div className="flex justify-between items-center">
                         <span className="font-medium min-w-[120px]">Monday - Friday:</span>
-                        <span className="text-right ml-4">8:00 AM / 5:00 PM</span>
+                        <span className="text-right ml-4">8:00 AM - 5:00 PM</span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="font-medium min-w-[120px]">Saturday:</span>
-                        <span className="text-right ml-4">9:00 AM / 1:00 PM</span>
+                        <span className="text-right ml-4">9:00 AM - 1:00 PM</span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="font-medium min-w-[120px]">Sunday:</span>
