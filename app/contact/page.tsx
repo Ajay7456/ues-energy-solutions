@@ -101,42 +101,24 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Phone */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <div className="flex items-start">
-                  <Phone className="h-6 w-6 text-blue-900 mr-4 mt-1" />
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Phone Numbers</h3>
-                    <div className="space-y-2">
-                      <a href="tel:+2348054261206" className="text-gray-600 hover:text-blue-900 block">
-                        +234 80 5426 1206
-                      </a>
-                      <a href="tel:+2348034450222" className="text-gray-600 hover:text-blue-900 block">
-                        +234 80 3445 0222
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Hours */}
+              {/* Business Hours */}
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <div className="flex items-start">
                   <Clock className="h-6 w-6 text-blue-900 mr-4 mt-1" />
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Business Hours</h3>
-                    <div className="space-y-2 text-gray-600">
-                      <div className="flex justify-between">
-                        <span className="font-medium">Monday - Friday:</span>
-                        <span>8:00 AM / 5:00 PM</span>
+                  <div className="w-full">
+                    <h3 className="text-xl font-semibold text-gray-800 mb-4">Business Hours</h3>
+                    <div className="space-y-4 text-gray-600">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium min-w-[120px]">Monday - Friday:</span>
+                        <span className="text-right ml-4">8:00 AM / 5:00 PM</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="font-medium">Saturday:</span>
-                        <span>9:00 AM / 1:00 PM</span>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium min-w-[120px]">Saturday:</span>
+                        <span className="text-right ml-4">9:00 AM / 1:00 PM</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="font-medium">Sunday:</span>
-                        <span>Closed</span>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium min-w-[120px]">Sunday:</span>
+                        <span className="text-right ml-4">Closed</span>
                       </div>
                     </div>
                   </div>
